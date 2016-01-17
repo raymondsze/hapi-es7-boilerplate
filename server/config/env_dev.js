@@ -2,11 +2,14 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2016-01-01 03:08:25
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-17 03:37:53
+* @Last Modified time: 2016-01-18 00:01:39
 */
 // This config will be used if process.env.NODE_ENV is set to 'dev'
 
-const Boom = require('boom');
+import Boom from 'boom';
+import CatboxRedis from 'catbox-redis';
+import GoodWinstonReporter from 'good-winston-reporter';
+import Winston from 'winston';
 
 // validate decoded token
 const validate = async function (decoded, request, next) {
@@ -21,12 +24,11 @@ const validate = async function (decoded, request, next) {
 			next(invalidTokenError, false);
 		}
 	} catch (err) {
-		request.log(['ERROR'], err);
 		next(invalidTokenError, false);
 	}
 };
 
-module.exports = {
+export default {
 	// Server options used to strat Hapi server
 	server: {
 		host: 'localhost',
@@ -34,7 +36,7 @@ module.exports = {
 		cache: [
 			{
 				name: 'redis',
-				engine: require('catbox-redis'),
+				engine: CatboxRedis,
 				host: '127.0.0.1',
 				port: 6379,
 				partition: 'cache'
@@ -106,7 +108,7 @@ module.exports = {
 		// This parameter is used to report the operation status for every opsInterval mini-seconds
 		// opsInterval: 1000,
 		reporters: [{
-			reporter: require('good-winston-reporter'),
+			reporter: GoodWinstonReporter,
 			events: {
 				log: '*',
 				request: '*',
@@ -114,7 +116,7 @@ module.exports = {
 				error: '*'
 			},
 			config: {
-				logger: require('winston')
+				logger: Winston
 			}
 		}]
 	},

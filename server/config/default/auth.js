@@ -2,9 +2,9 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2016-01-01 03:08:44
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-12 23:31:40
+* @Last Modified time: 2016-01-17 14:44:29
 */
-module.exports = {
+export default {
 	// Secret used to sign access_token
 	key: '5e4bde6c-ae02-11e5-bf7f-feff819cdc9f',
 	urlKey: 'access-token',

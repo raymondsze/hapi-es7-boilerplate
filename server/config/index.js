@@ -2,24 +2,31 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2016-01-01 02:53:52
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-03 02:59:20
+* @Last Modified time: 2016-01-17 19:22:24
 */
-const _ = require('lodash');
-const defaultConfig = require('./default');
+import _ from 'lodash';
+import defaultConfig from './default';
+import prodConfig from './env_prod';
+import uatConfig from './env_uat';
+import qaConfig from './env_qa';
+import devConfig from './env_dev';
+
+let config = {};
 /* eslint-disable no-process-env */
 switch (process.env.NODE_ENV || 'dev') {
 case 'prod':
-	module.exports = _.merge({}, defaultConfig, require('./env_prod'));
+	config = _.merge({}, defaultConfig, prodConfig);
 	break;
 case 'uat':
-	module.exports = _.merge({}, defaultConfig, require('./env_uat'));
+	config = _.merge({}, defaultConfig, uatConfig);
 	break;
 case 'qa':
-	module.exports = _.merge({}, defaultConfig, require('./env_qa'));
+	config = _.merge({}, defaultConfig, qaConfig);
 	break;
 case 'dev':
 default:
-	module.exports = _.merge({}, defaultConfig, require('./env_dev'));
+	config = _.merge({}, defaultConfig, devConfig);
 	break;
 }
 /* eslint-enable no-process-env */
+export default config;

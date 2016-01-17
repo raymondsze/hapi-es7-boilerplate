@@ -2,27 +2,24 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2015-12-31 03:06:43
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-17 04:22:24
+* @Last Modified time: 2016-01-18 01:27:50
 */
-require('./lib');
-const _ = require('lodash');
-const Hapi = require('hapi');
-
-// create a connection to Hapi Server
-const config = _.clone(require('./config').server);
-const host = config.host;
-const port = config.port;
-
+import _ from 'lodash';
+import Hapi from 'hapi';
+import config from './config';
+import plugins from './plugins';
+const serverConfig = _.clone(config.server);
+const host = serverConfig.host;
+const port = serverConfig.port;
 // host and port is not allowed for hapi server configuration
-delete config.host;
-delete config.port;
-const server = new Hapi.Server(config);
+delete serverConfig.host;
+delete serverConfig.port;
+const server = new Hapi.Server(serverConfig);
 
 // connection with host and port
 server.connection({host: host, port: port});
 
 // registers all plugins
-const plugins = require('./plugins');
 function registerPlugins(index, callback) {
 	const plugin = plugins[index];
 	if (plugin) {
@@ -38,11 +35,10 @@ function registerPlugins(index, callback) {
 		callback();
 	}
 }
-
 registerPlugins(0, () => {
 	server.start(function () {
 		server.log(['info'], 'Server started at ' + server.info.uri);
 	});
 });
 
-module.exports = server;
+export default server;

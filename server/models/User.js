@@ -2,12 +2,13 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2016-01-01 03:05:37
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-11 02:48:48
+* @Last Modified time: 2016-01-18 00:41:27
 */
 
-const mongoose = require('mongoose');
-const Promise = require('bluebird');
-
+import mongoose from 'mongoose';
+import Promise from 'bluebird';
+mongoose.Promise = Promise;
+ 
 const schema = new mongoose.Schema({
 	username: {
 		type: String,
@@ -45,4 +46,4 @@ schema.methods.getInfo = async function () {
 	};
 };
 
-module.exports = Promise.promisifyAll(mongoose.model('User', schema, 'Users'));
+export default mongoose.model('User', schema, 'Users');

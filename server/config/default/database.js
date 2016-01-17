@@ -2,9 +2,9 @@
 * @Author: Sze Ka Wai Raymond (FakeC)
 * @Date:   2016-01-01 02:59:11
 * @Last Modified by:   Sze Ka Wai Raymond (FakeC)
-* @Last Modified time: 2016-01-17 03:38:16
+* @Last Modified time: 2016-01-17 14:44:22
 */
-module.exports = {
+export default {
 	mongo: {
 		host: 'localhost',
 		port: 27017,

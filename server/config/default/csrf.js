@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	key: 'csrf-token',
 	size: 43,
 	autoGenerate: false,
