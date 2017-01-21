@@ -1,7 +1,7 @@
 # hapi-es7-boilerplate
 A Hapi boilerplate restful api server using ECMAScript 7
 # Plugins
-## Self written
+## Self written 
 "hapi-async-methods" (Written by me, to import methods from package with async style)<br/>
 "hapi-async-routes" (Written by me, to import route handlers from package with async style)<br/>
 "hapi-jwt-token" (Written by me, combine with hapi-auth-jwt2 for easier access token validation)<br/>
